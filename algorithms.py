@@ -1,8 +1,45 @@
+from collections import deque
 import heapq
 import sys
 
 input = sys.stdin.readline
 INF = int(1e9)
+
+
+class DFSAlgorithm:
+    def __init__(self) -> None:
+        graph = [[], [2, 3, 8], [1, 7], [1, 4, 5],
+                 [3, 5], [3, 4], [7], [2, 6, 8], [1, 7]]
+        visited = [False] * 9
+
+        self.dfs(graph, 1, visited)
+
+    def dfs(self, graph, v, visited):
+        visited[v] = True
+        print(v, end=' ')
+        for i in graph[v]:
+            if not visited[i]:
+                self.dfs(graph, i, visited)
+
+
+class BFSAlgorithm:
+    def __init__(self) -> None:
+        graph = [[], [2, 3, 8], [1, 7], [1, 4, 5],
+                 [3, 5], [3, 4], [7], [2, 6, 8], [1, 7]]
+        visited = [False] * 9
+
+        self.bfs(graph, 1, visited)
+
+    def bfs(self, graph, start, visited):
+        queue = deque([start])
+        visited[start] = True
+        while queue:
+            v = queue.popleft()
+            print(v, end=' ')
+            for i in graph[v]:
+                if not visited[i]:
+                    queue.append(i)
+                    visited[i] = True
 
 
 class DijkstraAlgorithm:

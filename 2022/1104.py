@@ -43,9 +43,6 @@ class Tests(TestCase):
 class Submit:
     """내가 작성한 코드"""
 
-    def __init__(self) -> None:
-        self.문자열_test = ['K1KA5CB7', 'AJKDLSI412K4JSJ9D']
-
     def 만들_수_없는_금액(self, nums: list[int]):
         """
         여러가지로 접근하는 건 좋았으나 해결책을 찾아도 어딘가 엉성함 ㅋㅋ
