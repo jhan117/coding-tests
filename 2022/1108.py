@@ -69,6 +69,9 @@ class Submit:
         return s_ans == t_ans
 
     def isSubsequence(self, s: str, t: str) -> bool:
+        """
+        못 품
+        """
         arr = [None] * len(s)
         for i, s_str in enumerate(s):
             for t_str in t:
@@ -76,8 +79,6 @@ class Submit:
                     if not arr[i]:
                         arr[i] = t.index(t_str)
                         break
-                    else:
-
         return False
 
 
@@ -89,6 +90,16 @@ class Solution:
         도대체 이런 생각은 어떻게 해야 나오는거지???? 개똑똑한놈들...
         """
         return len(set(zip(s, t))) == len(set(s)) == len(set(t))
+
+    def isSubsequence(self, s: str, t: str) -> bool:
+        i, j = 0, 0
+
+        while i < len(s) and j < len(t):
+            if s[i] == t[j]:
+                i += 1
+            j += 1
+
+        return i == len(s)
 
 
 if __name__ == '__main__':
