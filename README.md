@@ -18,7 +18,7 @@
 |   22/11/08    |  ⭕  |    String     |   [LeetCode](https://leetcode.com/problems/isomorphic-strings/)    | [205. Isomorphic Strings](/2022/1108.py#L88-L92)         |  Easy  |      01:01      |
 | 22/11/08 ~ 09 |  ❌  |    String     |     [LeetCode](https://leetcode.com/problems/is-subsequence/)      | [392. Is Subsequence](/2022/1108.py#L94-L102)            |  Easy  |      00:34      |
 |   22/11/09    |  ❌  |  Linked List  | [LeetCode](https://leetcode.com/problems/merge-two-sorted-lists/)  | [21. Merge Two Sorted Lists](/2022/1109.py#L99-L113)     |  Easy  |      01:25      |
-|   22/11/09    |  ❌  |  Linked List  |   [LeetCode](https://leetcode.com/problems/reverse-linked-list/)   | [206. Reverse Linked List](/2022/1109.py#L115-L136)      |  Easy  |      00:34      |
+|   22/11/09    |  ❌  |  Linked List  |   [LeetCode](https://leetcode.com/problems/reverse-linked-list/)   | [206. Reverse Linked List](/2022/1109.py#L115-L145)      |  Easy  |      00:34      |
 |    22/11/0    |      |    DFS/BFS    |                               이코테                               | 연구소                                                   |   2    |      00:00      |
 |    22/11/0    |      |    Sorting    |                               이코테                               | 국영수                                                   |   -    |      00:00      |
 |    22/11/0    |      |    Sorting    |                               이코테                               | 안테나                                                   |   -    |      00:00      |
