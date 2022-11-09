@@ -114,7 +114,16 @@ class Solution:
 
     def reverseList(self, head: Optional[ListNode], prev=None) -> Optional[ListNode]:
         """
-        간단한 건데 재귀보다 그냥 반복문을 쓸걸 그랬음.
+        간단한 건데 재귀보다 그냥 반복문을 쓰는걸 생각해볼 걸 그랬음.
+        
+        풀이법
+        1. 현재 노드의 다음 노드 들고 와서 이전 노드를 다음 노드로 넣기
+        2. 현재 노드 및 이전 노드 값 업데이트
+        3. 위를 현재 노드가 없을 때까지 반복
+    
+        ex)
+        1, 2, 3일 경우
+        2, 1, 3 -> 3, 2, 1
         """
         # recursive
         # if not head:
