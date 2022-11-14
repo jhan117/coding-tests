@@ -24,6 +24,7 @@
 |   22/11/10    |  ❌  |  Greedy, DP   |  [LeetCode](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/)  | [121. Best Time to Buy and Sell Stock](/2022/1110.py#L176-L200)  |  Easy  |      00:20      |
 |   22/11/11    |  ❌  |   Tree, DFS   |   [LeetCode](https://leetcode.com/problems/n-ary-tree-preorder-traversal/)   | [589. N-ary Tree Preorder Traversal](/2022/1111.py#L55-L75)      |  Easy  |      00:22      |
 |   22/11/11    |  ❌  |   Tree, BFS   | [LeetCode](https://leetcode.com/problems/binary-tree-level-order-traversal/) | [102. Binary Tree Level Order Traversal](/2022/1111.py#L80-L104) | Medium |      00:27      |
+|   22/11/14    |  ❌  |   Tree, DFS   |    [LeetCode](https://leetcode.com/problems/validate-binary-search-tree/)    | [98. Validate Binary Search Tree](/2022/1114.py#L12-L27)         | Medium |      00:30      |
 |    22/11/0    |      |    DFS/BFS    |                                    이코테                                    | 연구소                                                           |   2    |      00:00      |
 |    22/11/0    |      |    Sorting    |                                    이코테                                    | 국영수                                                           |   -    |      00:00      |
 |    22/11/0    |      |    Sorting    |                                    이코테                                    | 안테나                                                           |   -    |      00:00      |
