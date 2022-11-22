@@ -1,5 +1,4 @@
 from unittest import TestCase, main, skip
-from collections import Counter
 
 
 class Tests(TestCase):
@@ -55,30 +54,6 @@ class Solution:
                 dp[i][j] = dp[i - 1][j] + dp[i][j - 1]
 
         return dp[-1][-1]
-
-    def findAnagrams(self, s: str, p: str) -> list[int]:
-        # take counter of first n elements in s_dict with n = len(p) - 1
-        s_dict = Counter(s[:len(p)-1])
-        # counter of p, this should not be changed
-        p_dict = Counter(p)
-        start = 0
-        # final result list
-        res = []
-        # We iterate over the string s, and in each step we check if s_dict and p_dict match
-        for i in range(len(p)-1, len(s)):
-            # updating the counter & adding the character
-            s_dict[s[i]] += 1
-            # checking if counters match
-            if s_dict == p_dict:
-                res.append(start)
-            # remove the first element from counter
-            s_dict[s[start]] -= 1
-            # if element count = 0, pop it from the counter
-            if s_dict[s[start]] == 0:
-                del s_dict[s[start]]
-            start += 1
-
-        return res
 
 
 if __name__ == '__main__':
