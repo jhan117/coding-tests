@@ -15,28 +15,26 @@ class Tests(TestCase):
 
 class Solution:
     def findAnagrams(self, s: str, p: str) -> list[int]:
-        # take counter of first n elements in s_dict with n = len(p) - 1
-        s_dict = Counter(s[:len(p)-1])
-        # counter of p, this should not be changed
-        p_dict = Counter(p)
-        start = 0
-        # final result list
-        res = []
-        # We iterate over the string s, and in each step we check if s_dict and p_dict match
-        for i in range(len(p)-1, len(s)):
-            # updating the counter & adding the character
-            s_dict[s[i]] += 1
-            # checking if counters match
-            if s_dict == p_dict:
-                res.append(start)
-            # remove the first element from counter
-            s_dict[s[start]] -= 1
-            # if element count = 0, pop it from the counter
-            if s_dict[s[start]] == 0:
-                del s_dict[s[start]]
-            start += 1
+        ans = []
+        p_len = len(p)
 
-        return res
+        p_cnt = Counter(p)
+        s_cnt = Counter(s[:p_len])
+
+        if s_cnt == p_cnt:
+            ans.append(0)
+
+        for i in range(len(s) - p_len):
+            s_cnt[s[i]] -= 1
+            if s_cnt[s[i]] == 0:
+                del s_cnt[s[i]]
+
+            s_cnt[s[i + p_len]] += 1
+
+            if s_cnt == p_cnt:
+                ans.append(i + 1)
+
+        return ans
 
     def characterReplacement(self, s: str, k: int) -> int:
         maxlen, largestCount = 0, 0
