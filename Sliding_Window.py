@@ -37,16 +37,19 @@ class Solution:
         return ans
 
     def characterReplacement(self, s: str, k: int) -> int:
-        maxlen, largestCount = 0, 0
-        arr = Counter()
-        for idx in range(len(s)):
-            arr[s[idx]] += 1
-            largestCount = max(largestCount, arr[s[idx]])
-            if maxlen - largestCount >= k:
-                arr[s[idx - maxlen]] -= 1
+        cnt = Counter()
+        maxLen, left = 0
+
+        for i in s:
+            cnt[i] += 1
+            cur = maxLen - cnt.most_common(1)[0][1]
+            if k <= cur:
+                cnt[s[left]] -= 1
+                left += 1
             else:
-                maxlen += 1
-        return maxlen
+                maxLen += 1
+
+        return maxLen
 
 
 if __name__ == '__main__':
