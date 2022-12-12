@@ -38,7 +38,7 @@ class Solution:
 
     def characterReplacement(self, s: str, k: int) -> int:
         cnt = Counter()
-        maxLen, left = 0
+        maxLen, left = 0, 0
 
         for i in s:
             cnt[i] += 1
