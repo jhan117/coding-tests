@@ -70,7 +70,6 @@ function solution_142085(n, k, enemy) {
 
 function solution_140107(k, d) {
   // 점 찍기
-
   let a = 0,
     b = 0;
   let answer = 0;
@@ -84,7 +83,6 @@ function solution_140107(k, d) {
       if (y > d) break; // y 종료
 
       const diagonal = Math.sqrt(x ** 2 + y ** 2);
-      // console.log(x, y, diagonal);
       if (diagonal <= d) {
         answer++;
       } else break;
