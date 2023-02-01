@@ -12,5 +12,5 @@
 
 ### Programming Language
 
-~ 22.12.15 : Python
+~ 22.12.15 : Python  
 22.12.15 ~ : JavaScript
