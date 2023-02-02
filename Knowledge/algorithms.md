@@ -44,7 +44,7 @@ queue.popleft()
 
 ### DFS(깊이 우선 탐색)
 
-[소스 코드 확인하기](/algorithms.py#L9-L22)
+[소스 코드 확인하기](/Knowledge/algorithms.py#L9-L22)
 
 최대한 멀리 있는 노드를 우선으로 탐색한다.
 
@@ -57,7 +57,7 @@ queue.popleft()
 
 ### BFS(너비 우선 탐색)
 
-[소스 코드 확인하기](/algorithms.py#L25-L42)
+[소스 코드 확인하기](/Knowledge/algorithms.py#L25-L42)
 
 가까운 노드부터 탐색한다.
 
@@ -77,7 +77,7 @@ queue.popleft()
 
 ### 다익스트라(Dijkstra, 데이크스트라) 최단 경로 알고리즘
 
-[소스 코드 확인하기](/algorithms.py#L45-L79)
+[소스 코드 확인하기](/Knowledge/algorithms.py#L45-L79)
 
 - 한 노드에서 출발하여 다른 특정 노드까지의 최단 경로를 구해주는 알고리즘
 - 음의 간선이 없을 때 정상적으로 동작함
@@ -93,7 +93,7 @@ queue.popleft()
 
 ### 플로이드 워셜(Floyd Warshall) 알고리즘
 
-[소스 코드 확인하기](/algorithms.py#L82-L115)
+[소스 코드 확인하기](/Knowledge/algorithms.py#L82-L115)
 
 - 모든 노드에서 출발하여 다른 모든 노드까지의 최단 경로를 구해주는 알고리즘
 - 다이나믹 프로그래밍으로 분류됨
