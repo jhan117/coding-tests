@@ -49,3 +49,35 @@ function DFSandBFS(isBFS = false) {
 
 console.log(DFSandBFS());
 console.log(DFSandBFS(true));
+
+/**
+ * [23.02.05 - Baekjoon] 2178 미로 탐색
+ * @param {number} N Y 끝 좌표
+ * @param {number} M X 끝 좌표
+ * @param {[]} graph 인접 행렬
+ * @returns {number} 지나야 하는 최소의 칸 수
+ */
+function mazeSearch(N, M, graph) {
+  const dx = [1, -1, 0, 0];
+  const dy = [0, 0, 1, -1];
+  const visited = Array.from({ length: N }, () => Array(M).fill(0));
+  const queue = [[0, 0]]; // x, y
+
+  visited[0][0] = 1;
+
+  while (queue.length) {
+    [x, y] = queue.shift();
+
+    for (let i = 0; i < 4; i++) {
+      const nextY = y + dy[i];
+      const nextX = x + dx[i];
+
+      if (nextX < 0 || M <= nextX || nextY < 0 || N <= nextY) continue;
+      if (graph[nextY][nextX] && !visited[nextY][nextX]) {
+        visited[nextY][nextX] = visited[y][x] + 1;
+        queue.push([nextX, nextY]);
+      }
+    }
+  }
+  return visited[N - 1][M - 1];
+}
