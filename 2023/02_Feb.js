@@ -81,3 +81,29 @@ function mazeSearch(N, M, graph) {
   }
   return visited[N - 1][M - 1];
 }
+
+/**
+ * [23.02.06 - Baekjoon] 1149 RGB거리
+ * @param {number} N 집 개수
+ * @param {[]} costs 색깔별 비용 배열
+ * @returns {number} 모든 집을 칠하는 비용의 최솟값
+ */
+function RGB(N, costs) {
+  const dp = Array.from({ length: N }, () => []);
+  const idxs = [
+    [1, 2],
+    [0, 2],
+    [0, 1],
+  ];
+
+  dp[0] = costs[0];
+
+  for (let i = 1; i < N; i++) {
+    const arr = dp[i - 1];
+    for (let j = 0; j < 3; j++) {
+      const [f, s] = idxs[j];
+      dp[i][j] = Math.min(arr[f], arr[s]) + costs[i][j];
+    }
+  }
+  return Math.min(...dp[N - 1]);
+}
