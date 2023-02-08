@@ -19,8 +19,6 @@ function makeOne(N) {
   return d[N];
 }
 
-console.log(makeOne(Number(N)));
-
 // 인접 행렬
 const graph = Array.from({ length: n + 1 }, () => []);
 /**
@@ -46,9 +44,6 @@ function DFSandBFS(isBFS = false) {
   }
   return answer.join(" ");
 }
-
-console.log(DFSandBFS());
-console.log(DFSandBFS(true));
 
 /**
  * [23.02.05 - Baekjoon] 2178 미로 탐색
@@ -106,4 +101,70 @@ function RGB(N, costs) {
     }
   }
   return Math.min(...dp[N - 1]);
+}
+
+/**
+ * [23.02.07 - Baekjoon] 1074 Z
+ * @param {number} n 2^n x 2^n, 2차원 배열 크기
+ * @param {number} r 행
+ * @param {number} c 열
+ * @returns {number} r행 c열을 방문한 순서
+ */
+function Z(n, r, c) {
+  if (n === 0) return 0;
+
+  const size = 2 ** ((n - 1) * 2);
+  const half = 2 ** n / 2;
+
+  if (r < half && c < half) {
+    return Z(n - 1, r, c);
+  } else if (r < half && c >= half) {
+    return size + Z(n - 1, r, c - half);
+  } else if (r >= half && c < half) {
+    return size * 2 + Z(n - 1, r - half, c);
+  } else {
+    return size * 3 + Z(n - 1, r - half, c - half);
+  }
+}
+
+/**
+ * [23.02.08 - Baekjoon] 2667 단지번호붙이기
+ * @param {number} N 지도의 크기
+ * @param {[]} graph 2차원 배열의 정사각형 지도
+ * @returns {string} 총 단지수 + 각 단지내의 집의 수(오름차순)
+ */
+function complexNumbering(N, graph) {
+  const dx = [0, 0, 1, -1];
+  const dy = [1, -1, 0, 0];
+
+  let complex = 0;
+  const homeCnt = [];
+
+  for (let y = 0; y < N; y++) {
+    for (let x = 0; x < N; x++) {
+      if (graph[y][x]) {
+        const stack = [[x, y]];
+
+        let cnt = 0;
+        while (stack.length) {
+          const [cx, cy] = stack.pop();
+
+          if (graph[cy][cx]) {
+            graph[cy][cx] = 0;
+            cnt++;
+            for (let i = 0; i < 4; i++) {
+              const [nx, ny] = [cx + dx[i], cy + dy[i]];
+              if (nx < 0 || ny < 0 || nx >= N || ny >= N) continue;
+              if (graph[ny][nx]) {
+                stack.push([nx, ny]);
+              }
+            }
+          }
+        }
+        complex++;
+        homeCnt.push(cnt);
+      }
+    }
+  }
+  return complex + "\n" + homeCnt.sort((a, b) => a - b).join("\n");
 }
