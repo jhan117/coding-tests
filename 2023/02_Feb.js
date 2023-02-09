@@ -168,3 +168,44 @@ function complexNumbering(N, graph) {
   }
   return complex + "\n" + homeCnt.sort((a, b) => a - b).join("\n");
 }
+
+/**
+ * [23.02.09 - Baekjoon] 1991 트리 순회
+ * @param {{}} tree 트리
+ * @returns {string} 전회, 중위, 후위 순회 결과
+ */
+function tourTree(tree) {
+  let answer = "";
+
+  preorder("A");
+  answer += "\n";
+  inorder("A");
+  answer += "\n";
+  postorder("A");
+
+  return answer;
+
+  function preorder(node) {
+    if (node === ".") return;
+    const [l, r] = tree[node];
+    answer += node;
+    preorder(l);
+    preorder(r);
+  }
+
+  function inorder(node) {
+    if (node === ".") return;
+    const [l, r] = tree[node];
+    inorder(l);
+    answer += node;
+    inorder(r);
+  }
+
+  function postorder(node) {
+    if (node === ".") return;
+    const [l, r] = tree[node];
+    postorder(l);
+    postorder(r);
+    answer += node;
+  }
+}
