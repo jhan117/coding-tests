@@ -209,3 +209,26 @@ function tourTree(tree) {
     answer += node;
   }
 }
+
+/**
+ * [23.02.10 - Baekjoon] 12865 평범한 배낭
+ * @param {number} N 물품 수
+ * @param {number} K 버틸 수 있는 무게
+ * @param {number[]} items 물건의 무게와 물건의 가치 배열
+ * @returns {number} 가치 합의 최댓값
+ */
+function backpack(N, K, items) {
+  const dp = Array.from({ length: N + 1 }, () => Array(K + 1).fill(0));
+
+  for (let r = 1; r <= N; r++) {
+    for (let c = 1; c <= K; c++) {
+      const [w, v] = items[r - 1];
+      if (w > c && dp[r - 1][c] === 0) continue;
+      const leftValue = dp[r - 1][c - w] + v || 0;
+      dp[r][c] = Math.max(dp[r - 1][c], leftValue);
+    }
+  }
+  return dp[N][K];
+}
+
+console.log(backpack(N, K, items));
