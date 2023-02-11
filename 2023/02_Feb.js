@@ -231,4 +231,36 @@ function backpack(N, K, items) {
   return dp[N][K];
 }
 
-console.log(backpack(N, K, items));
+/**
+ * [23.02.11 - Baekjoon] 9663 N-Queen
+ * @param {number} N N x N 체스판, 퀸 개수
+ * @returns {number} 서로 공격할 수 없게 놓는 경우의 수
+ */
+function NQueen(N) {
+  const row = Array(N).fill(0);
+  return recursion(N, row, 0);
+}
+
+function recursion(N, row, n) {
+  let result = 0;
+  if (n === N) {
+    return (result += 1);
+  }
+
+  for (let i = 0; i < N; i++) {
+    row[n] = i;
+    if (check(row, n)) {
+      result += recursion(N, row, n + 1);
+    }
+  }
+  return result;
+}
+
+function check(row, n) {
+  for (let i = 0; i < n; i++) {
+    const checkAbove = row[n] === row[i];
+    const checkDiagonal = Math.abs(row[n] - row[i]) === Math.abs(n - i);
+    if (checkAbove || checkDiagonal) return false;
+  }
+  return true;
+}
