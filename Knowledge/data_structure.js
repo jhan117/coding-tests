@@ -59,10 +59,41 @@ class PriorityQueue {
   }
 }
 
-const priorityQueue = new PriorityQueue();
+// Queue 구현
+class Node {
+  constructor(item) {
+    this.item = item;
+    this.next = null;
+  }
+}
 
-console.log(priorityQueue);
+class Queue {
+  constructor() {
+    this.head = null;
+    this.tail = null;
+    this.size = 0;
+  }
 
-priorityQueue.pushPQueue("a");
+  enqueue(item) {
+    const node = new Node(item);
 
-console.log(priorityQueue);
+    if (!this.head) {
+      this.head = node;
+    } else {
+      this.tail.next = node;
+    }
+    this.tail = node;
+    this.size += 1;
+  }
+
+  dequeue() {
+    const item = this.head.item;
+    this.head = this.head.next;
+    this.size -= 1;
+    return item;
+  }
+
+  isEmpty() {
+    return this.size ? false : true;
+  }
+}

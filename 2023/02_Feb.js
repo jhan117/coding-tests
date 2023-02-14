@@ -264,3 +264,53 @@ function check(row, n) {
   }
   return true;
 }
+
+/**
+ * [23.02.14 - Baekjoon] 2206 벽 부수고 이동하기
+ * @param {number} N row
+ * @param {number} M column
+ * @param {[]} graph N x M
+ * @returns {number} 벽 최대 1개 부수고 간 최단 거리
+ */
+function breakWall(N, M, graph) {
+  // visited[row][column][broken]
+  const visited = Array.from({ length: N }, () =>
+    Array.from({ length: M }, () => Array(2).fill(0))
+  );
+
+  const [dr, dc] = [
+    [-1, 1, 0, 0],
+    [0, 0, -1, 1],
+  ];
+
+  const queue = new Queue();
+  queue.enqueue([0, 0, 0]);
+  visited[0][0][0] = 1;
+
+  while (!queue.isEmpty()) {
+    const [cr, cc, cb] = queue.dequeue();
+
+    if (cr === N - 1 && cc === M - 1) {
+      return visited[cr][cc][cb];
+    }
+
+    for (let i = 0; i < 4; i++) {
+      const [nr, nc] = [cr + dr[i], cc + dc[i]];
+
+      if (nr < 0 || nc < 0 || nr >= N || nc >= M) continue;
+      if (visited[nr][nc][cb]) continue;
+
+      // next is 1 and broken is 0
+      if (graph[nr][nc] && !cb) {
+        visited[nr][nc][1] = visited[cr][cc][cb] + 1;
+        queue.enqueue([nr, nc, 1]);
+      }
+      // next is 0
+      if (!graph[nr][nc]) {
+        visited[nr][nc][cb] = visited[cr][cc][cb] + 1;
+        queue.enqueue([nr, nc, cb]);
+      }
+    }
+  }
+  return -1;
+}
