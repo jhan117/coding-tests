@@ -314,3 +314,101 @@ function breakWall(N, M, graph) {
   }
   return -1;
 }
+
+/**
+ * [23.02.17 - Baekjoon] 12100 2048 (Easy)
+ * @param {number} N 보드판 크기
+ * @param {[]} board 보드판
+ * @returns {number} 최대 5번 이동시켜서 얻을 수 있는 가장 큰 블록의 숫자
+ */
+function play2048(N, board) {
+  const direction = ["top", "down", "left", "right"];
+
+  return play2048Recursion(N, direction, board, 5, []);
+}
+
+function play2048Recursion(N, direction, board, cnt, answer) {
+  if (cnt === 0) {
+    const curMax = Math.max(...board.flat());
+    return answer.push(curMax);
+  }
+
+  for (let i = 0; i < 4; i++) {
+    const movedBoard = moving(N, direction[i], board);
+    play2048Recursion(N, direction, movedBoard, cnt - 1, answer);
+  }
+  return Math.max(...answer);
+}
+
+function moving(N, direction, board) {
+  const copiedBoard = board.map((v) => v.slice());
+  const isTopDown = direction === "top" || direction === "down" ? true : false;
+
+  if (isTopDown) {
+    // 세로 배열 생성
+    for (let c = 0; c < N; c++) {
+      const rows = [];
+      for (let r = 0; r < N; r++) {
+        if (copiedBoard[r][c]) {
+          rows.push(copiedBoard[r][c]);
+        }
+      }
+      if (direction === "down") rows.reverse();
+
+      for (let r = 0; r < rows.length; r++) {
+        const nextRow = r + 1;
+
+        if (nextRow < 0 || nextRow >= rows.length) break;
+        const currentNum = rows[r];
+        const nextNum = rows[nextRow];
+        if (currentNum === nextNum) {
+          rows[r] = currentNum * 2;
+          rows.splice(nextRow, 1);
+        }
+      }
+
+      if (rows.length) {
+        for (let r = 0; r < N; r++) {
+          const row = direction === "top" ? r : N - 1 - r;
+
+          if (rows[r]) {
+            copiedBoard[row][c] = rows[r];
+          } else {
+            copiedBoard[row][c] = 0;
+          }
+        }
+      }
+    }
+  } else {
+    // 가로 배열 생성
+    for (let r = 0; r < N; r++) {
+      const cols = copiedBoard[r].filter((v) => v);
+      if (direction === "right") cols.reverse();
+
+      for (let c = 0; c < cols.length; c++) {
+        const nextCol = c + 1;
+
+        if (nextCol < 0 || nextCol >= cols.length) break;
+        const currentNum = cols[c];
+        const nextNum = cols[nextCol];
+        if (currentNum === nextNum) {
+          cols[c] = currentNum * 2;
+          cols.splice(nextCol, 1);
+        }
+      }
+
+      if (cols.length) {
+        for (let c = 0; c < N; c++) {
+          const col = direction === "left" ? c : N - 1 - c;
+
+          if (cols[c]) {
+            copiedBoard[r][col] = cols[c];
+          } else {
+            copiedBoard[r][col] = 0;
+          }
+        }
+      }
+    }
+  }
+  return copiedBoard;
+}
