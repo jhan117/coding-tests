@@ -412,3 +412,60 @@ function moving(N, direction, board) {
   }
   return copiedBoard;
 }
+
+// [23.02.20 - Baekjoon] 2098 외판원 순회
+class TSPClass {
+  constructor(input) {
+    const inputs = input.split("\n");
+
+    this.N = Number(inputs.shift());
+    this.costs = inputs.map((v) => v.split(" ").map(Number));
+
+    this.dp = Array.from({ length: 1 << this.N }, () => []);
+  }
+
+  main() {
+    let answer;
+    answer = this.DFS(0, 0);
+
+    // 경우의 수가 없는 경우 -1 출력
+    if (answer === Infinity) return -1;
+    return answer;
+  }
+
+  // visited : 이미 방문한 도시 체크
+  // now : 이번에 지날 도시 번호
+  DFS(visited, now) {
+    // now 도시 번호 추가
+    visited |= 1 << now;
+
+    // 모든 도시를 지난 경우
+    if (visited === (1 << this.N) - 1) {
+      // now → 0으로 가는 경우 있으면 반환
+      if (this.costs[now][0]) return this.costs[now][0];
+      return Infinity;
+    }
+
+    // dp 배열에 저장되어 있는 경우 그 값 반환
+    if (this.dp[visited][now] > 0) return this.dp[visited][now];
+
+    // 없는 경우 무한 넣기
+    this.dp[visited][now] = Infinity;
+    // 모든 도시 방문
+    for (let i = 0; i < this.N; i++) {
+      // 방문하려는 i와 now 번호가 같지 않아야 하고
+      // 방문되어 있지 않아야 하며
+      // 갈 수 있는 경로가 있어야 한다.
+      if (i !== now && !(visited & (1 << i)) && this.costs[now][i] > 0) {
+        // 최소 비용 갱신
+        // 방문 현황과 현재 도시가 같을 때,
+        // 방문하지 않은 도시들을 모두 거쳐서 시작점으로 돌아가는 데 드는 최소 비용을 말한다.
+        this.dp[visited][now] = Math.min(
+          this.dp[visited][now],
+          this.DFS(visited, i) + this.costs[now][i]
+        );
+      }
+    }
+    return this.dp[visited][now];
+  }
+}
