@@ -469,3 +469,81 @@ class TSPClass {
     return this.dp[visited][now];
   }
 }
+
+// [23.02.22 - Baekjoon] 13460 구슬 탈출 2
+class BeadEscape2 {
+  constructor(input) {
+    const inputs = input.split("\n");
+
+    [this.N, this.M] = inputs.shift().split(" ").map(Number);
+    this.board = inputs.map((v) => v.split(""));
+
+    this.dr = [-1, 1, 0, 0];
+    this.dc = [0, 0, -1, 1];
+
+    // visited[Red Row][Red Col][Blue Row][Blue Col]
+    this.visited = Array.from({ length: this.N }, () =>
+      Array.from({ length: this.M }, () =>
+        Array.from({ length: this.N }, () => Array(this.M).fill(false))
+      )
+    );
+
+    let rRow, rCol, bRow, bCol;
+
+    this.board.forEach((v, i) => {
+      const red = v.findIndex((v) => v === "R");
+      const blue = v.findIndex((v) => v === "B");
+      if (red !== -1) {
+        rRow = i;
+        rCol = red;
+      }
+      if (blue !== -1) {
+        bRow = i;
+        bCol = blue;
+      }
+    });
+    this.queue = [[rRow, rCol, bRow, bCol, 1]];
+    this.visited[rRow][rCol][bRow][bCol] = true;
+  }
+
+  main() {
+    while (this.queue.length) {
+      const [rRow, rCol, bRow, bCol, depth] = this.queue.shift();
+
+      if (depth > 10) return -1;
+
+      for (let i = 0; i < 4; i++) {
+        let [nrRow, nrCol, rCnt] = this.move(rRow, rCol, i);
+        let [nbRow, nbCol, bCnt] = this.move(bRow, bCol, i);
+
+        if (this.board[nbRow][nbCol] === "O") continue;
+        if (this.board[nrRow][nrCol] === "O") return depth;
+        if (nrCol === nbCol && nrRow === nbRow) {
+          if (rCnt > bCnt) {
+            nrRow -= this.dr[i];
+            nrCol -= this.dc[i];
+          } else {
+            nbRow -= this.dr[i];
+            nbCol -= this.dc[i];
+          }
+        }
+        if (!this.visited[nrRow][nrCol][nbRow][nbCol]) {
+          this.visited[nrRow][nrCol][nbRow][nbCol] = true;
+          this.queue.push([nrRow, nrCol, nbRow, nbCol, depth + 1]);
+        }
+      }
+    }
+    return -1;
+  }
+
+  move(r, c, dIdx) {
+    const [mr, mc] = [this.dr[dIdx], this.dc[dIdx]];
+    let cnt = 0;
+    while (this.board[r + mr][c + mc] !== "#" && this.board[r][c] !== "O") {
+      r += mr;
+      c += mc;
+      cnt += 1;
+    }
+    return [r, c, cnt];
+  }
+}
