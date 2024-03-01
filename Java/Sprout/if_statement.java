@@ -65,10 +65,27 @@ public class if_statement {
         }
     }
 
+    static void _2420() {
+        // 2420. 사파리월드
+        Scanner sc = new Scanner(System.in);
+
+        long a, b;
+        a = sc.nextInt();
+        b = sc.nextInt();
+
+        long num = (a - b);
+        if (num < 0){
+            System.out.println(-num);
+        } else {
+            System.out.println(num);
+        }
+    }
+
     public static void main(String[] args) {
         if_statement._1330();
         if_statement._9498();
         if_statement._14681();
         if_statement._2753();
+        if_statement._2420();
     }
 }
